@@ -1044,28 +1044,34 @@ a.contact-quick-card:hover {
   margin-top: 4px;
 }
 
-/* Form notification (success/error popup) */
-.form-notification {
+/* Form notification (success/error popup) - card chiara, mai nera */
+#form-notification.form-notification {
   position: fixed;
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: 10001;
   max-width: 90%;
-  width: 500px;
-  padding: 20px 24px;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 520px;
+  padding: 24px 28px;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
   font-family: var(--font-body);
   font-size: 1rem;
-  line-height: 1.5;
-  animation: slideDown 0.4s ease;
+  line-height: 1.6;
+  animation: notificationSlideDown 0.35s ease;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #ffffff !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border);
 }
 
-@keyframes slideDown {
+@keyframes notificationSlideDown {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
+    transform: translateX(-50%) translateY(-24px);
   }
   to {
     opacity: 1;
@@ -1073,16 +1079,53 @@ a.contact-quick-card:hover {
   }
 }
 
-.notification-success {
-  background: #4caf50;
-  color: #fff;
-  border-left: 5px solid #2e7d32;
+#form-notification.form-notification.notification-success {
+  border-left: 5px solid var(--color-primary);
 }
 
-.notification-error {
-  background: #f44336;
-  color: #fff;
+#form-notification.form-notification.notification-error {
   border-left: 5px solid #c62828;
+}
+
+#form-notification.form-notification::before {
+  content: '✓';
+  font-size: 28px;
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 157, 88, 0.12);
+  color: var(--color-primary);
+  border-radius: 50%;
+}
+
+#form-notification.form-notification.notification-error::before {
+  content: '✕';
+  background: rgba(198, 40, 40, 0.12);
+  color: #c62828;
+}
+
+.form-notification-text {
+  flex: 1;
+  color: var(--color-text);
+}
+
+@media (max-width: 767px) {
+  #form-notification.form-notification {
+    width: 90%;
+    max-width: 340px;
+    padding: 20px 22px;
+    font-size: 0.95rem;
+  }
+  
+  #form-notification.form-notification::before {
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
 }
 
 /* ========================================
@@ -2329,4 +2372,43 @@ a.contact-quick-card:hover {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+}
+
+/* ========================================
+   ALTCHA WIDGET CUSTOMIZATION
+   Sfondo chiaro + spunta visibile
+   ======================================== */
+altcha-widget {
+  display: block;
+  width: 100%;
+  /* Sfondo chiaro (non nero) */
+  --altcha-color-base: #ffffff;
+  --altcha-color-text: #2e2e2e;
+  --altcha-color-border: #e5e5e5;
+  --altcha-color-border-focus: var(--color-primary);
+  --altcha-color-error-text: #c62828;
+  --altcha-color-footer-bg: #f8f8f8;
+  --altcha-border-width: 1px;
+  --altcha-border-radius: 6px;
+  --altcha-max-width: 100%;
+  accent-color: var(--color-primary);
+}
+
+/* Spunta checkbox visibile dentro il widget (Shadow DOM parts se esposti) */
+altcha-widget::part(checkbox) {
+  accent-color: var(--color-primary);
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  cursor: pointer;
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+}
+
+altcha-widget::part(label) {
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text);
 }

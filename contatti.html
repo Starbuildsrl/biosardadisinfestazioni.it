@@ -154,10 +154,12 @@
                 <label for="biosarda-message" class="required">Messaggio</label>
                 <textarea id="biosarda-message" name="message" placeholder="Descrivi la tua esigenza..." rows="4" required maxlength="5000"></textarea>
               </div>
-              <div class="form-group">
+              <div class="form-group altcha-wrapper">
                 <altcha-widget
+                  class="biosarda-altcha"
                   challengeurl="https://starbuild.it/biosarda/altcha-challenge.php"
-                  name="altcha">
+                  name="altcha"
+                  style="--altcha-color-base:#ffffff;--altcha-color-text:#2e2e2e;--altcha-color-border:#e5e5e5;--altcha-color-footer-bg:#f8f8f8;--altcha-border-radius:6px;--altcha-max-width:100%;">
                 </altcha-widget>
               </div>
               <div class="form-group form-group-checkbox">
@@ -168,7 +170,6 @@
               </div>
               <button type="submit" class="btn btn-primary btn-submit">Invia richiesta</button>
             </form>
-            <div id="form-notification" class="form-notification" style="display: none;"></div>
           </div>
 
           <div class="contact-info">
@@ -251,19 +252,18 @@
         alert(message); 
         return; 
       }
-      el.textContent = message;
-      el.className = 'form-notification ' + (type === 'success' ? 'notification-success' : 'notification-error');
-      el.style.display = 'block';
+      var isSuccess = type === 'success';
+      el.className = 'form-notification ' + (isSuccess ? 'notification-success' : 'notification-error');
+      el.innerHTML = '<span class="form-notification-text">' + message + '</span>';
+      el.style.display = 'flex';
       
-      // Scroll to top to ensure notification is visible
       window.scrollTo({ top: 0, behavior: 'smooth' });
       
-      if (type === 'success') {
+      if (isSuccess) {
         setTimeout(function() { 
           el.style.display = 'none'; 
         }, 8000);
       } else {
-        // For errors, keep visible until user dismisses or corrects
         setTimeout(function() { 
           el.style.display = 'none'; 
         }, 10000);
@@ -306,10 +306,10 @@
             messageText = parts.slice(1).join('|');
           }
           if (status === 'OK') {
-            showNotification(messageText || 'Messaggio inviato con successo! Ti contatteremo presto.', 'success');
+            showNotification('Grazie per averci contattato! Le risponderemo a breve.', 'success');
             form.reset();
           } else {
-            showNotification(messageText || 'Si \u00e8 verificato un errore durante l\'invio del messaggio.', 'error');
+            showNotification(messageText || 'Si è verificato un errore durante l\'invio del messaggio.', 'error');
           }
         })
         .catch(function() {
@@ -325,5 +325,6 @@
   })();
   </script>
   <script src="js/main.js" defer></script>
+  <div id="form-notification" class="form-notification" role="alert" aria-live="polite" style="display: none;"></div>
 </body>
 </html>
