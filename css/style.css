@@ -2376,34 +2376,34 @@ a.contact-quick-card:hover {
 
 /* ========================================
    ALTCHA WIDGET CUSTOMIZATION
-   Sfondo chiaro + spunta visibile
+   Checkbox verde con V bianca quando Verified
    ======================================== */
 altcha-widget {
   display: block;
   width: 100%;
-  /* Sfondo chiaro (non nero) */
+  /* Colori widget */
   --altcha-color-base: #ffffff;
   --altcha-color-text: #2e2e2e;
-  --altcha-color-border: #e5e5e5;
+  --altcha-color-border: #d0d0d0;
   --altcha-color-border-focus: var(--color-primary);
   --altcha-color-error-text: #c62828;
   --altcha-color-footer-bg: #f8f8f8;
   --altcha-border-width: 1px;
   --altcha-border-radius: 6px;
   --altcha-max-width: 100%;
-  accent-color: var(--color-primary);
+  /* Checkbox verde con V bianca (come esempio) */
+  --altcha-checkbox-color: var(--color-primary);
+  --altcha-checkbox-checkmark-color: #ffffff;
 }
 
-/* Spunta checkbox visibile dentro il widget (Shadow DOM parts se esposti) */
+/* Forza checkbox visibile con sfondo verde e V bianca */
 altcha-widget::part(checkbox) {
-  accent-color: var(--color-primary);
-  width: 22px;
-  height: 22px;
-  min-width: 22px;
-  min-height: 22px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   cursor: pointer;
-  -webkit-appearance: checkbox;
-  appearance: checkbox;
+  border-radius: 3px;
 }
 
 altcha-widget::part(label) {
@@ -2411,4 +2411,5 @@ altcha-widget::part(label) {
   font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--color-text);
+  font-weight: 600;
 }

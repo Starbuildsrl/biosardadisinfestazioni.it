@@ -329,18 +329,25 @@
   <script>
   (function() {
     var PRIMARY_GREEN = '#0F9D58';
-    var styleId = 'data-biosarda-altcha';
-    var checkSvg = 'data:image/svg+xml,' + encodeURIComponent(
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="' + PRIMARY_GREEN.replace('#', '%23') + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+    var styleId = 'biosarda-altcha-style';
+    // SVG V bianca su sfondo trasparente (da usare con background verde)
+    var checkSvgWhite = 'data:image/svg+xml,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
     );
-    function styleAltchaCheckbox() {
+    
+    function injectStyles() {
       var widget = document.querySelector('altcha-widget');
-      if (!widget || !widget.shadowRoot) return false;
+      if (!widget) return false;
+      
       var root = widget.shadowRoot;
-      if (root.querySelector('style[' + styleId + ']')) return true;
+      if (!root) return false;
+      
+      if (root.getElementById(styleId)) return true;
+      
       var style = document.createElement('style');
-      style.setAttribute(styleId, '1');
+      style.id = styleId;
       style.textContent = [
+        '/* Checkbox VERDE con V BIANCA quando verified (come esempio) */',
         'input[type="checkbox"] {',
         '  -webkit-appearance: none !important;',
         '  appearance: none !important;',
@@ -348,45 +355,72 @@
         '  height: 20px !important;',
         '  min-width: 20px !important;',
         '  min-height: 20px !important;',
-        '  margin: 0 !important;',
+        '  margin: 0 10px 0 0 !important;',
         '  cursor: pointer !important;',
-        '  opacity: 1 !important;',
-        '  flex-shrink: 0 !important;',
-        '  border: 2px solid #e5e5e5 !important;',
-        '  border-radius: 4px !important;',
+        '  border: 2px solid #d0d0d0 !important;',
+        '  border-radius: 3px !important;',
         '  background: #fff !important;',
-        '  vertical-align: middle !important;',
+        '  flex-shrink: 0 !important;',
+        '  transition: all 0.2s ease !important;',
         '}',
-        'input[type="checkbox"]:checked {',
+        'input[type="checkbox"]:hover {',
         '  border-color: ' + PRIMARY_GREEN + ' !important;',
-        '  background: #fff url("' + checkSvg + '") center/14px 14px no-repeat !important;',
+        '}',
+        '/* VERIFIED: sfondo VERDE + V BIANCA */',
+        'input[type="checkbox"]:checked {',
+        '  border: none !important;',
+        '  background-color: ' + PRIMARY_GREEN + ' !important;',
+        '  background-image: url("' + checkSvgWhite + '") !important;',
+        '  background-position: center !important;',
+        '  background-repeat: no-repeat !important;',
+        '  background-size: 14px 14px !important;',
+        '}',
+        '/* Fallback per role="checkbox" */',
+        '[role="checkbox"] {',
+        '  width: 20px !important;',
+        '  height: 20px !important;',
+        '  border: 2px solid #d0d0d0 !important;',
+        '  border-radius: 3px !important;',
+        '  background: #fff !important;',
+        '  transition: all 0.2s ease !important;',
         '}',
         '[role="checkbox"][aria-checked="true"] {',
-        '  border: 2px solid ' + PRIMARY_GREEN + ' !important;',
-        '  background: #fff url("' + checkSvg + '") center/14px 14px no-repeat !important;',
+        '  border: none !important;',
+        '  background-color: ' + PRIMARY_GREEN + ' !important;',
+        '  background-image: url("' + checkSvgWhite + '") !important;',
+        '  background-position: center !important;',
+        '  background-repeat: no-repeat !important;',
         '  background-size: 14px 14px !important;',
         '}'
       ].join('\n');
+      
       root.appendChild(style);
-      setTimeout(function() {
-        var cb = root.querySelector('input[type="checkbox"]');
-        if (cb && cb.checked) cb.checked = true;
-      }, 600);
       return true;
     }
-    function run() {
-      if (styleAltchaCheckbox()) return;
-      setTimeout(run, 300);
+    
+    function tryInject() {
+      if (injectStyles()) return;
+      setTimeout(tryInject, 200);
     }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() { setTimeout(run, 100); });
-    } else {
-      setTimeout(run, 100);
-    }
-    setTimeout(run, 800);
-    setTimeout(run, 2000);
-    var aw = document.querySelector('altcha-widget');
-    if (aw) aw.addEventListener('verified', run);
+    
+    tryInject();
+    setTimeout(tryInject, 500);
+    setTimeout(tryInject, 1000);
+    setTimeout(tryInject, 2000);
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      var widget = document.querySelector('altcha-widget');
+      if (widget) {
+        widget.addEventListener('verified', function() {
+          setTimeout(tryInject, 100);
+        });
+        widget.addEventListener('statechange', function(e) {
+          if (e.detail && e.detail.state === 'verified') {
+            setTimeout(tryInject, 100);
+          }
+        });
+      }
+    });
   })();
   </script>
 </body>
