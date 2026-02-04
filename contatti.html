@@ -326,5 +326,26 @@
   </script>
   <script src="js/main.js" defer></script>
   <div id="form-notification" class="form-notification" role="alert" aria-live="polite" style="display: none;"></div>
+  <script>
+  (function() {
+    var styleId = 'biosarda-altcha-style';
+    function injectStyles() {
+      var widget = document.querySelector('altcha-widget');
+      if (!widget || !widget.shadowRoot) return false;
+      var root = widget.shadowRoot;
+      if (root.getElementById(styleId)) return true;
+      var style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = '.altcha-checkbox input { accent-color: #0F9D58 !important; }';
+      root.appendChild(style);
+      return true;
+    }
+    function tryInject() {
+      if (!injectStyles()) setTimeout(tryInject, 300);
+    }
+    tryInject();
+    document.addEventListener('DOMContentLoaded', tryInject);
+  })();
+  </script>
 </body>
 </html>
