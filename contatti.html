@@ -123,21 +123,21 @@
             <h3>Invia un messaggio con le tue richieste</h3>
             <form class="biosarda-form" id="biosarda-form" action="https://starbuild.it/biosarda/send.php" method="POST" aria-label="Modulo di contatto">
               <div class="form-group">
-                <label for="biosarda-name" class="sr-only">Nome e Cognome</label>
+                <label for="biosarda-name" class="required">Nome e Cognome</label>
                 <input type="text" id="biosarda-name" name="name" placeholder="Nome e Cognome" required maxlength="100" autocomplete="name">
               </div>
               <div class="form-group">
-                <label for="biosarda-email" class="sr-only">Email</label>
+                <label for="biosarda-email" class="required">Email</label>
                 <input type="email" id="biosarda-email" name="email" placeholder="Email" required maxlength="254" autocomplete="email">
               </div>
               <div class="form-group">
-                <label for="biosarda-phone" class="sr-only">Telefono</label>
+                <label for="biosarda-phone">Telefono</label>
                 <input type="tel" id="biosarda-phone" name="phone" placeholder="Telefono" maxlength="20" autocomplete="tel">
               </div>
               <div class="form-group">
-                <label for="biosarda-service" class="sr-only">Servizio di interesse</label>
+                <label for="biosarda-service" class="required">Servizio di interesse</label>
                 <select id="biosarda-service" name="service" required>
-                  <option value="" disabled selected>Servizio di interesse</option>
+                  <option value="" disabled selected>Seleziona un servizio</option>
                   <option value="Sanificazioni">Sanificazioni</option>
                   <option value="Derattizzazione">Derattizzazione</option>
                   <option value="Lotta biologica integrata">Lotta biologica integrata</option>
@@ -151,7 +151,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="biosarda-message" class="sr-only">Messaggio</label>
+                <label for="biosarda-message" class="required">Messaggio</label>
                 <textarea id="biosarda-message" name="message" placeholder="Descrivi la tua esigenza..." rows="4" required maxlength="5000"></textarea>
               </div>
               <div class="form-group">
@@ -161,7 +161,7 @@
                 </altcha-widget>
               </div>
               <div class="form-group form-group-checkbox">
-                <label>
+                <label class="required">
                   <input type="checkbox" id="biosarda-privacy" name="privacy" value="1" required>
                   Ho letto e accetto la <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
                 </label>
@@ -247,12 +247,26 @@
     }
     function showNotification(message, type) {
       var el = document.getElementById('form-notification');
-      if (!el) { alert(message); return; }
+      if (!el) { 
+        alert(message); 
+        return; 
+      }
       el.textContent = message;
       el.className = 'form-notification ' + (type === 'success' ? 'notification-success' : 'notification-error');
       el.style.display = 'block';
+      
+      // Scroll to top to ensure notification is visible
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
       if (type === 'success') {
-        setTimeout(function() { el.style.display = 'none'; }, 8000);
+        setTimeout(function() { 
+          el.style.display = 'none'; 
+        }, 8000);
+      } else {
+        // For errors, keep visible until user dismisses or corrects
+        setTimeout(function() { 
+          el.style.display = 'none'; 
+        }, 10000);
       }
     }
     form.addEventListener('submit', function(e) {

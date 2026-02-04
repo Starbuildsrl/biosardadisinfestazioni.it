@@ -372,8 +372,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
 
         // Validate email format
-        const value = field.value.trim();
-        if (field.type === 'email' && value) {
+        const value = field.value ? field.value.trim() : '';
+        if (field.type === 'email' && value && !isEmpty) {
           const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailPattern.test(value)) {
             isValid = false;
@@ -394,6 +394,13 @@ document.addEventListener('DOMContentLoaded', async function () {
         const firstError = contactForm.querySelector('.form-group.error input, .form-group.error textarea, .form-group.error select');
         if (firstError) {
           firstError.focus();
+        }
+        // Scroll to first error
+        const firstErrorGroup = contactForm.querySelector('.form-group.error');
+        if (firstErrorGroup) {
+          const yOffset = -100;
+          const y = firstErrorGroup.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }
     });

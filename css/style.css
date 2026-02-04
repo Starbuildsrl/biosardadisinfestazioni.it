@@ -889,6 +889,12 @@ a.contact-quick-card:hover {
   color: var(--color-text);
 }
 
+.form-group label.required::after {
+  content: ' *';
+  color: #d32f2f;
+  font-weight: 700;
+}
+
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -945,6 +951,9 @@ a.contact-quick-card:hover {
   margin-top: 3px;
   flex-shrink: 0;
   cursor: pointer;
+  accent-color: var(--color-primary);
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
 }
 
 .form-group-checkbox label {
@@ -953,6 +962,13 @@ a.contact-quick-card:hover {
   margin-bottom: 0;
   cursor: pointer;
   line-height: 1.5;
+}
+
+.form-group-checkbox label.required::after {
+  content: ' *';
+  color: #d32f2f;
+  font-weight: 700;
+  margin-left: 2px;
 }
 
 .form-group-checkbox label a {
@@ -1026,6 +1042,47 @@ a.contact-quick-card:hover {
   color: #d32f2f;
   font-size: 0.8rem;
   margin-top: 4px;
+}
+
+/* Form notification (success/error popup) */
+.form-notification {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  max-width: 90%;
+  width: 500px;
+  padding: 20px 24px;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.notification-success {
+  background: #4caf50;
+  color: #fff;
+  border-left: 5px solid #2e7d32;
+}
+
+.notification-error {
+  background: #f44336;
+  color: #fff;
+  border-left: 5px solid #c62828;
 }
 
 /* ========================================
