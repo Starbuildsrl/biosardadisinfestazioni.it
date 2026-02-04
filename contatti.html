@@ -330,10 +330,6 @@
   (function() {
     var PRIMARY_GREEN = '#0F9D58';
     var styleId = 'biosarda-altcha-style';
-    // SVG V bianca su sfondo trasparente (da usare con background verde)
-    var checkSvgWhite = 'data:image/svg+xml,' + encodeURIComponent(
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
-    );
     
     function injectStyles() {
       var widget = document.querySelector('altcha-widget');
@@ -347,7 +343,7 @@
       var style = document.createElement('style');
       style.id = styleId;
       style.textContent = [
-        '/* Checkbox VERDE con V BIANCA quando verified (come esempio) */',
+        '/* Checkbox container con sfondo verde quando checked */',
         'input[type="checkbox"] {',
         '  -webkit-appearance: none !important;',
         '  appearance: none !important;',
@@ -361,36 +357,24 @@
         '  border-radius: 3px !important;',
         '  background: #fff !important;',
         '  flex-shrink: 0 !important;',
+        '  position: relative !important;',
         '  transition: all 0.2s ease !important;',
         '}',
-        'input[type="checkbox"]:hover {',
-        '  border-color: ' + PRIMARY_GREEN + ' !important;',
-        '}',
-        '/* VERIFIED: sfondo VERDE + V BIANCA */',
+        '/* Sfondo VERDE quando checked */',
         'input[type="checkbox"]:checked {',
-        '  border: none !important;',
+        '  border-color: ' + PRIMARY_GREEN + ' !important;',
         '  background-color: ' + PRIMARY_GREEN + ' !important;',
-        '  background-image: url("' + checkSvgWhite + '") !important;',
-        '  background-position: center !important;',
-        '  background-repeat: no-repeat !important;',
-        '  background-size: 14px 14px !important;',
         '}',
-        '/* Fallback per role="checkbox" */',
-        '[role="checkbox"] {',
-        '  width: 20px !important;',
-        '  height: 20px !important;',
-        '  border: 2px solid #d0d0d0 !important;',
-        '  border-radius: 3px !important;',
-        '  background: #fff !important;',
-        '  transition: all 0.2s ease !important;',
+        '/* SVG icon vicino alla checkbox - forza colore bianco */',
+        'label svg {',
+        '  width: 14px !important;',
+        '  height: 14px !important;',
         '}',
-        '[role="checkbox"][aria-checked="true"] {',
-        '  border: none !important;',
-        '  background-color: ' + PRIMARY_GREEN + ' !important;',
-        '  background-image: url("' + checkSvgWhite + '") !important;',
-        '  background-position: center !important;',
-        '  background-repeat: no-repeat !important;',
-        '  background-size: 14px 14px !important;',
+        'label svg path,',
+        'label svg polyline,',
+        'label svg circle {',
+        '  stroke: white !important;',
+        '  fill: white !important;',
         '}'
       ].join('\n');
       
