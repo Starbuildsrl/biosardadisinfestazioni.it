@@ -895,7 +895,7 @@ a.contact-quick-card:hover {
   font-weight: 700;
 }
 
-.form-group input,
+.form-group:not(.altcha-wrapper) input,
 .form-group textarea,
 .form-group select {
   width: 100%;
