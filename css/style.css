@@ -2376,12 +2376,10 @@ a.contact-quick-card:hover {
 
 /* ========================================
    ALTCHA WIDGET CUSTOMIZATION
-   Checkbox verde con V bianca quando Verified
    ======================================== */
 altcha-widget {
   display: block;
   width: 100%;
-  /* Colori widget */
   --altcha-color-base: #ffffff;
   --altcha-color-text: #2e2e2e;
   --altcha-color-border: #d0d0d0;
@@ -2391,25 +2389,5 @@ altcha-widget {
   --altcha-border-width: 1px;
   --altcha-border-radius: 6px;
   --altcha-max-width: 100%;
-  /* Checkbox verde con V bianca (come esempio) */
-  --altcha-checkbox-color: var(--color-primary);
-  --altcha-checkbox-checkmark-color: #ffffff;
-}
-
-/* Forza checkbox visibile con sfondo verde e V bianca */
-altcha-widget::part(checkbox) {
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-  min-height: 20px;
-  cursor: pointer;
-  border-radius: 3px;
-}
-
-altcha-widget::part(label) {
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--color-text);
-  font-weight: 600;
+  accent-color: var(--color-primary);
 }
