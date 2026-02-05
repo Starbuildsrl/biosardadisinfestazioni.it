@@ -2008,6 +2008,13 @@ a.contact-quick-card:hover {
   }
 }
 
+/* Fix: disabilita parallax hero su mobile per evitare effetto zoom */
+@media (max-width: 767px) {
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
 /* ========================================
    RESPONSIVE
    ======================================== */
