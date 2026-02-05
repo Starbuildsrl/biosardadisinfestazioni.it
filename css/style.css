@@ -400,18 +400,30 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero h1 {
   font-family: var(--font-logo);
-  font-size: 3rem;
+  font-size: 2rem;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
 }
 
 .hero .subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+  font-size: 1rem;
+  margin-bottom: 24px;
   line-height: 1.6;
   opacity: 0.95;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-buttons .btn {
+  min-width: 220px;
 }
 
 /* ========================================
@@ -2036,7 +2048,17 @@ a.contact-quick-card:hover {
   }
 
   .hero h1 {
-    font-size: 3.5rem;
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+  }
+
+  .hero .subtitle {
+    font-size: 1.15rem;
+  }
+
+  .hero-buttons {
+    flex-direction: row;
+    gap: 16px;
   }
 }
 
