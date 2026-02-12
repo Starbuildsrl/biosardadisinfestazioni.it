@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pagina non trovata - Errore 404</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #f8fafc;
+      --color-text: #1e293b;
+      --color-text-muted: #64748b;
+      --color-primary: #3b82f6;
+      --color-primary-hover: #2563eb;
+      --color-border: #e2e8f0;
+      --color-card: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 540px;
+      margin: 2rem;
+      padding: 3rem 2.5rem;
+      background: var(--color-card);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .error-code {
+      font-size: 6rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin: 0;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .error-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .error-message {
+      color: var(--color-text-muted);
+      margin: 0 0 2rem;
+      font-size: 1rem;
+    }
+
+    .suggestions {
+      text-align: left;
+      background: var(--color-bg);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .suggestions-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin: 0 0 0.75rem;
+    }
+
+    .suggestions ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .suggestions li {
+      margin: 0.5rem 0;
+      color: var(--color-text-muted);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      background: var(--color-primary);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: var(--color-primary-hover);
+      outline: none;
+    }
+
+    .btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+    }
+
+    .footer {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .footer a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        margin: 1rem;
+        padding: 2rem 1.5rem;
+      }
+
+      .error-code {
+        font-size: 4.5rem;
+      }
+
+      .error-title {
+        font-size: 1.25rem;
+      }
+    }
+
+    /* Preferenza dark mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #0f172a;
+        --color-text: #f1f5f9;
+        --color-text-muted: #94a3b8;
+        --color-border: #334155;
+        --color-card: #1e293b;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <p class="error-code">404</p>
+    <h1 class="error-title">Pagina non trovata</h1>
+    <p class="error-message">
+      La pagina che stai cercando non esiste o potrebbe essere stata spostata.
+    </p>
+
+    <div class="suggestions">
+      <p class="suggestions-title">Cosa puoi fare</p>
+      <ul>
+        <li>Verifica che l'indirizzo sia scritto correttamente</li>
+        <li>Torna alla pagina precedente</li>
+        <li>Visita la home page per ricominciare</li>
+      </ul>
+    </div>
+
+    <a href="/" class="btn">Torna alla Home</a>
+
+    <div class="footer">
+      <p>Se pensi che questa pagina dovrebbe esistere, <a href="/contatti">contattaci</a>.</p>
+    </div>
+  </main>
+
+  <!-- 404 Collector Script -->
+  <script>
+    (function() {
+      'use strict';
+
+      // Configurazione (sostituita dal generatore)
+      var CONFIG = {
+        siteId: 'biosarda',
+        token: '0efba3e84ea4f42ea50d488f9cd40ee09c171048559bf94c135184c1970634ed',
+        collectorUrl: 'https://404collector.starbuild.it/collector/404-collector.php'
+      };
+
+      // Verifica configurazione valida
+      if (CONFIG.siteId.indexOf('{{') !== -1 || CONFIG.token.indexOf('{{') !== -1) {
+        return;
+      }
+
+      // Dati da inviare
+      var data = {
+        site_id: CONFIG.siteId,
+        url: window.location.href,
+        referrer: document.referrer || '',
+        ua: navigator.userAgent || ''
+      };
+
+      // Invio silenzioso
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', CONFIG.collectorUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-KEY', CONFIG.token);
+        xhr.send(JSON.stringify(data));
+      } catch (e) {
+        // Fail silently
+      }
+    })();
+  </script>
+</body>
+</html>
