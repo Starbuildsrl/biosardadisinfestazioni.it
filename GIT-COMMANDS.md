@@ -56,15 +56,3 @@ Risolvi eventuali conflitti se richiesto, poi:
 ```batch
 git push -u origin main
 ```
-
-## File/cartelle esclusi (tramite .gitignore)
-
-- README.txt  
-- server.bat  
-- PIANO_AGGIORNAMENTO.md  
-- B3213_Revisione_sito_biosarda controfirmato.pdf  
-- materiale fotografico/  
-- materiale testuale/  
-- .claude/ (configurazione locale)
-
-Verifica con `git status` che questi elementi non compaiano tra i file da aggiungere.
